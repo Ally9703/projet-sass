@@ -1,0 +1,66 @@
+@use 'header';
+@import 'variables';
+
+// MIXINS
+
+@mixin boder-radius($radius...) {
+	-webkit-border-radius: $radius;
+	-moz-boder-radius: $radius;
+	-ms-boder-radius: $radius;
+	border-radius: $radius;
+}
+
+@mixin messages($couleur: white) {
+	color: map-get($couleurs, 'couleur-principale');
+	@include boder-radius(5px);
+	padding: 10px;
+	margin: 5px;
+}
+
+@mixin googleFonts($nom) {
+	@import url('https://fonts.googleapis.com/css2?family' + $nom + '&display=swap');
+}
+
+@include googleFonts('Roboto');
+@include googleFonts('Poppins');
+
+html {
+	font-size: 15px;
+	font-family: 'Poppins', 'arial';
+}
+body {
+	background: white;
+	margin: 0;
+	color: $couleurPrincipale;
+}
+
+.erreur {
+	@include messages();
+	background: red;
+}
+
+.succes {
+	@include messages();
+	background: green;
+}
+
+.notification {
+	@include messages(black);
+	background: #f3f3f3;
+	
+}
+
+@for $i from 1 through 6{
+	.colone-#{$i}{
+		width: 50px*$i;
+	}
+}
+
+
+// BOUCLE 
+
+ @each $cle, $valeur in $couleurs{
+	 .#{$cle}{
+		 color:#{$valeur};
+	 }
+ }
